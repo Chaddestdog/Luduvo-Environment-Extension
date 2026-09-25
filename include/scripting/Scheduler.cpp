@@ -2,9 +2,10 @@
 #include <Offsets.h>
 #include <MinHook.h>
 
+#include <scripting/GlobalBridge/Signal.h>
 
 
-// lwk i forgot what i was doing smh
+// base stuff ig / used as just testing :3
 static int wait(lua_State* L) {
     if (not lua_isnumber(L, 1))
         luaL_typeerror(L, 1, "number");
@@ -13,7 +14,6 @@ static int wait(lua_State* L) {
     lee::Scheduler::GetSingleton()->AddTask(L, std::chrono::duration<double>(delay));
     return lua_yield(L, 0);
 }
-
 
 static int loadstring(lua_State* L) {
     if (not lua_isstring(L, 1))
@@ -33,29 +33,30 @@ static int loadstring(lua_State* L) {
         return 0;
     }
 
+    free(bytecode);
+
     return 1;
 };
-
 
 namespace lee {
     bool lee::Scheduler::Initalise() {
         Start = std::chrono::duration<double>(std::chrono::high_resolution_clock::now().time_since_epoch());
 
-        auto LuaOpenBase = lee::Offsets::GetSingleton()->GetOffset<LPVOID>(lee::Offsets::OffsetKeys::luaopen_base);
+        auto LuaLSandbox = lee::Offsets::GetSingleton()->GetOffset<LPVOID>(lee::Offsets::OffsetKeys::luaL_sandbox);
 
         if (MH_Initialize() != MH_OK) {
             printf("MH_Initialize feiald\n");
-            return EXIT_FAILURE;
+            return false;
         }
 
-        if (MH_CreateHook(LuaOpenBase, reinterpret_cast<LPVOID>(&OpenBaseHook), reinterpret_cast<LPVOID*>(&OrigOpenBase)) != MH_OK) {
+        if (MH_CreateHook(LuaLSandbox, reinterpret_cast<LPVOID>(&LuaLSandboxHook), reinterpret_cast<LPVOID*>(&OrigLuaLSandbox)) != MH_OK) {
             printf("MH_CreateHook faild\n");
-            return EXIT_FAILURE;
+            return false;
         }
 
-        if (MH_EnableHook(LuaOpenBase) != MH_OK) {
+        if (MH_EnableHook(LuaLSandbox) != MH_OK) {
             printf("MH_EnableHook faild\n");
-            return EXIT_FAILURE;
+            return false;
         }
 
         return true;
@@ -86,5 +87,8 @@ namespace lee {
 
         lua_pushcfunction(L, loadstring, "loadstring");
         lua_setglobal(L, "loadstring");
+
+        lee::scripting::SignalBridge::Register(L);
+
     }
 }

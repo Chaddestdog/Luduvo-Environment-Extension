@@ -15,13 +15,13 @@ namespace lee {
     class Offsets {
     public:
         enum class OffsetKeys : uint8_t {
-            luaopen_base,
+            luaL_sandbox,
         };
 
         std::map<OffsetKeys, void*> OffsetS{};
 
         static constexpr std::array<std::pair<OffsetKeys, std::string_view>, 1> Signatures = {{
-            {OffsetKeys::luaopen_base, "56 48 83 EC 30 48 89 CE 48 C7 44 24"},
+            {OffsetKeys::luaL_sandbox, "56 48 83 EC 20 48 89 CE E8 ? ? ? ? EB"},
         }};
 
         static Offsets* GetSingleton() {

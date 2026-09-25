@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Luduvo Environment Extension.vcxproj" />
+  <Project Path="Luduvo Environment Extension.vcxproj" Id="9a2bf9ef-1c4c-442a-bae7-1d13a69f4872" />
 </Solution>

@@ -4,12 +4,11 @@
 #include <luacode.h>
 #include <vector>
 #include <chrono>
-#include <SafeQueue.h>
 
-typedef int(__fastcall* luaopen_base_t)(lua_State* L);
-extern luaopen_base_t OrigOpenBase;
+typedef void(__fastcall* luaL_sandbox_t)(lua_State* L);
+extern luaL_sandbox_t OrigLuaLSandbox;
 
-int OpenBaseHook(lua_State* L);
+void LuaLSandboxHook(lua_State* L);
 
 namespace lee {
 

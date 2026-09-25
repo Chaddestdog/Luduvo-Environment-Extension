@@ -1,10 +1,11 @@
 #include <scripting/Scheduler.h>
 #include <iostream>
+#include <scripting/Helpers.h>
 
-luaopen_base_t OrigOpenBase = nullptr;
-int OpenBaseHook(lua_State* L) {
+luaL_sandbox_t OrigLuaLSandbox = nullptr;
+void LuaLSandboxHook(lua_State* L) {
 
 	lee::Scheduler::GetSingleton()->Register(L);
 
-	return OrigOpenBase(L);
+	return OrigLuaLSandbox(L);
 }
