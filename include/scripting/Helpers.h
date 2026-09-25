@@ -2,22 +2,14 @@
 #include <lua.h>
 #include <iostream>
 
-
 #define lua_checklclosure(L, idx) { if (lua_iscfunction(L, idx)) luaL_argerror(L, idx, "Luau closure expected."); }
 
-#define lua_ensurelclosure(cl, idx) { if (cl->isC) luaL_argerror(L, idx, "Luau closure expected."); }
-
-#define lua_normalisestack(L, MaxSize) { if (lua_gettop(L) > MaxSize) [[unlikely]] lua_settop(L, MaxSize); }
-
-#define lua_enforcestack(L, MaxSize) { if (lua_gettop(L) > MaxSize) [[unlikely]] luaL_errorL(L, "function expects only %d arguments, you provided %d.", MaxSize, lua_gettop(L)); }
-
-#define lua_tomutclosure(L, idx) const_cast<Closure*>(reinterpret_cast<const Closure*>(lua_topointer(L, idx)))
+#define lua_normalisestack(L, MaxSize) { if (lua_gettop(L) > MaxSize) lua_settop(L, MaxSize); }
 
 #define lua_toclosure(L, idx) reinterpret_cast<const Closure*>(lua_topointer(L, idx))
 
 inline float lua_tofloat(lua_State* L, int idx) {
     double value = lua_tonumber(L, idx);
-
     if (value == -std::numeric_limits<double>::infinity())
         return -std::numeric_limits<float>::infinity();
 

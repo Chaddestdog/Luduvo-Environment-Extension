@@ -1,9 +1,9 @@
 #pragma once
-
+#include <vector>
 #include "GlobalBridge.h"
 #include "Connection.h"
 
-#include <vector>
+
 
 namespace lee::scripting {
 

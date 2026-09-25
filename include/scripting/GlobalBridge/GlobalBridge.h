@@ -1,9 +1,6 @@
 #pragma once
-
 #include <lua.h>
 #include <lualib.h>
-
-#include <utility>
 
 #undef RegisterClass
 #undef GetObject

@@ -1,7 +1,6 @@
 #include "Signal.h"
-#include <algorithm>
-
 #include "Connection.h"
+#include <scripting/Helpers.h>
 
 namespace lee::scripting {
 
@@ -51,6 +50,7 @@ namespace lee::scripting {
 
     // funcs
     int Signal::Connect(lua_State* L) {
+        lua_normalisestack(L, 2);
         auto& self = SignalBridge::GetObject(L, 1);
 
         if (not lua_isfunction(L, 2))
@@ -63,6 +63,7 @@ namespace lee::scripting {
     }
 
     int Signal::Once(lua_State* L) {
+        lua_normalisestack(L, 2);
         auto& self = SignalBridge::GetObject(L, 1);
 
         if (not lua_isfunction(L, 2))
@@ -115,6 +116,7 @@ namespace lee::scripting {
     }
 
     int Signal::New(lua_State* L) {
+        lua_normalisestack(L, 0);
         SignalBridge::PushObject(L, false);
         return 1;
     }

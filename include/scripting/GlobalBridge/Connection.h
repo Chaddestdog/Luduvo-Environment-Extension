@@ -1,7 +1,5 @@
 #pragma once
-
 #include "GlobalBridge.h"
-#include <cstring>
 
 namespace lee::scripting {
 

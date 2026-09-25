@@ -1,5 +1,4 @@
 #include <scripting/Scheduler.h>
-#include <iostream>
 #include <scripting/Helpers.h>
 
 luaL_sandbox_t OrigLuaLSandbox = nullptr;

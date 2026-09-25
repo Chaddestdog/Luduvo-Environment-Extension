@@ -1,5 +1,7 @@
+#include <scripting/Helpers.h>
 #include "Connection.h"
 #include "Signal.h"
+
 
 namespace lee::scripting {
 
@@ -35,6 +37,7 @@ namespace lee::scripting {
 
     // funcs
     int Connection::Disconnect(lua_State* L) {
+        lua_normalisestack(L, 1);
         auto& self = ConnectionBridge::GetObject(L, 1);
 
         if (not self.connected)

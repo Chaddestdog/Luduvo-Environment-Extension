@@ -1,15 +1,10 @@
 #pragma once
 #include <windows.h> 
-#include <cstdint>
-#include <memory>
 #include <map>
-#include <lua.h>
 #include <string_view>
 #include <array>
 #include <libhat/scanner.hpp>
-#include <psapi.h>
-#include <iostream>
-#pragma comment(lib, "psapi.lib")
+
 
 namespace lee {
     class Offsets {
