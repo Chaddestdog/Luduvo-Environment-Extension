@@ -3,8 +3,6 @@
 #include "GlobalBridge.h"
 #include "Connection.h"
 
-
-
 namespace lee::scripting {
 
     class Signal;

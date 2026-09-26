@@ -30,6 +30,9 @@
     <ClCompile Include="include\scripting\GlobalBridge\Connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\scripting\GlobalBridge\CFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Offsets.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\scripting\GlobalBridge\Connection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scripting\GlobalBridge\CFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

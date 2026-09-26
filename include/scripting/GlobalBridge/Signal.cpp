@@ -79,7 +79,7 @@ namespace lee::scripting {
         auto& self = SignalBridge::GetObject(L, 1);
 
         if (self.IsC) {
-            luaL_error(L, "%s can not be called if created for C objs", "fire");
+            luaL_error(L, "%s can not be called if created for C objs", "Fire");
             return 0;
         }
             
@@ -97,9 +97,10 @@ namespace lee::scripting {
             for (int i = 2; i <= args + 1; ++i)
                 lua_pushvalue(L, i);
 
+            // TODO: make it yeildable
             if (lua_pcall(L, args, 0, 0) != LUA_OK)
-                lua_pop(L, 1);
-
+                lua_error(L);
+                
             if (connection->IsOnce()) {
                 connection->connected = false;
 

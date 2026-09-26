@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\scripting\GlobalBridge\CFrame.cpp" />
     <ClCompile Include="include\scripting\GlobalBridge\Connection.cpp" />
     <ClCompile Include="include\scripting\GlobalBridge\Signal.cpp" />
     <ClCompile Include="include\scripting\Scheduler.cpp" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="dependencies\SafeQueue.h" />
     <ClInclude Include="include\Offsets.h" />
+    <ClInclude Include="include\scripting\GlobalBridge\CFrame.h" />
     <ClInclude Include="include\scripting\GlobalBridge\Connection.h" />
     <ClInclude Include="include\scripting\GlobalBridge\GlobalBridge.h" />
     <ClInclude Include="include\scripting\GlobalBridge\Signal.h" />

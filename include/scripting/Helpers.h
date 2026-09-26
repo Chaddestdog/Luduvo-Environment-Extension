@@ -2,11 +2,12 @@
 #include <lua.h>
 #include <iostream>
 
-#define lua_checklclosure(L, idx) { if (lua_iscfunction(L, idx)) luaL_argerror(L, idx, "Luau closure expected."); }
+#undef max
 
 #define lua_normalisestack(L, MaxSize) { if (lua_gettop(L) > MaxSize) lua_settop(L, MaxSize); }
 
-#define lua_toclosure(L, idx) reinterpret_cast<const Closure*>(lua_topointer(L, idx))
+#define lua_isinstance(L, idx) (lua_userdatatag(L, idx) == 1)
+
 
 inline float lua_tofloat(lua_State* L, int idx) {
     double value = lua_tonumber(L, idx);

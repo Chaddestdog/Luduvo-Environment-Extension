@@ -1,10 +1,11 @@
 #include "Scheduler.h"
 #include <Offsets.h>
 #include <MinHook.h>
+#include "Helpers.h"
+#include <iostream>
 
 #include <scripting/GlobalBridge/Signal.h>
-
-
+#include <scripting/GlobalBridge/CFrame.h>
 
 // base stuff ig / used as just testing :3
 static int wait(lua_State* L) {
@@ -38,6 +39,25 @@ static int loadstring(lua_State* L) {
 
     return 1;
 };
+
+
+static int test(lua_State* L) {
+    //if (not lua_isinstance(L))
+    //    return 0;
+
+    //Instance* ins = (Instance*)lua_touserdata(L, 1);
+
+    //auto a = lee::Offsets::GetSingleton()->GetOffset<lee::FunctionTypes::ResolveEntityComponent>(lee::Offsets::OffsetKeys::ResolveEntityComponent)(ins->world, "WorldTransform", nullptr);
+
+    //Mat* g = (Mat*)lee::Offsets::GetSingleton()->GetOffset<lee::FunctionTypes::ecs_get_id>(lee::Offsets::OffsetKeys::ecs_get_id)(ins->world, ins->entity, a);
+
+    //for (int i = 0; i < 4; i++) {
+    //    for (int v = 0; v < 4; v++)
+    //        std::cout << g->m[i * 4 + v] << " ";
+    //    std::cout << "\n";
+    //}
+    return 0;
+}
 
 namespace lee {
     bool lee::Scheduler::Initalise() {
@@ -89,7 +109,12 @@ namespace lee {
         lua_pushcfunction(L, loadstring, "loadstring");
         lua_setglobal(L, "loadstring");
 
-        lee::scripting::SignalBridge::Register(L);
+    #ifdef _DEBUG
+        lua_pushcfunction(L, test, "test");
+        lua_setglobal(L, "test");
+    #endif
 
+        lee::scripting::SignalBridge::Register(L);
+        lee::scripting::CFrameBridge::Register(L);
     }
 }

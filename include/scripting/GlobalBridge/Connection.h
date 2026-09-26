@@ -40,5 +40,4 @@ namespace lee::scripting {
     };
 
     using ConnectionBridge = GlobalBridge<Connection>;
-
 }

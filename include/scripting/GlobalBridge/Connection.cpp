@@ -2,7 +2,6 @@
 #include "Connection.h"
 #include "Signal.h"
 
-
 namespace lee::scripting {
 
     // meta methods
